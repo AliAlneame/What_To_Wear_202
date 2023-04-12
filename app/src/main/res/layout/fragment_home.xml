@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/svg_worm"
+                        tools:src="@drawable/svg_worm"
                         app:layout_constraintBottom_toBottomOf="@+id/text_location"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_day_date" />
@@ -60,9 +60,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
-                        android:text="Sat, 3 Aug"
+                        tools:text="Wed"
                         android:textColor="@color/material_on_primary_emphasis_medium"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_today"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="29°c"
+                        tools:text="29°c"
                         android:textColor="@color/material_on_primary_emphasis_high_type"
                         android:textSize="48sp"
                         app:layout_constraintBottom_toTopOf="@+id/text_location"
@@ -120,56 +120,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Here is our\npick for you today!"
+                android:layout_marginTop="24dp"
+                tools:text="Here is our pick for you today!"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="@color/material_on_surface_emphasis_high_type"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_our_pick"
-                app:layout_constraintEnd_toStartOf="@+id/image_our_pick"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/image_our_pick" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_days" />
 
 
-            <ImageView
-                android:id="@+id/image_our_pick"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/no_back_clothes_bro"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/text_our_pick"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view_days" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/image_our_pick"-->
+            <!--                android:layout_width="120dp"-->
+            <!--                android:layout_height="120dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:src="@drawable/no_back_clothes_bro"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/text_our_pick"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/recycler_view_days" />-->
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_clothes"
                 android:layout_width="0dp"
                 android:layout_height="260dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:foreground="@drawable/gradient"
                 android:scaleType="fitXY"
-                android:src="@drawable/image_worm_1"
+                tools:background="@drawable/image_worm_1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/image_our_pick"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/text_our_pick"
-                app:layout_constraintTop_toBottomOf="@id/image_our_pick"
+                app:layout_constraintTop_toBottomOf="@+id/text_our_pick"
                 app:shapeAppearance="@style/RoundedImageView" />
-
-            <TextView
-                android:id="@+id/text_on_image_clothes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingBottom="16dp"
-                android:text="Clothes suitable for today's worm weather"
-                android:textColor="@color/material_on_primary_emphasis_high_type"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@id/image_clothes"
-                app:layout_constraintEnd_toEndOf="@id/image_clothes"
-                app:layout_constraintStart_toStartOf="@id/image_clothes" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

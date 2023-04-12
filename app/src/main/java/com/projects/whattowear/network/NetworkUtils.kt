@@ -10,6 +10,7 @@ import org.json.JSONObject
 
 class NetworkUtils {
 
+    val intervalsList = mutableListOf<Interval>()
 
     fun getIntervalsJsonArrayFromJson(response: String): JSONArray {
         val jsonObject = JSONObject(response)
@@ -20,7 +21,7 @@ class NetworkUtils {
     }
 
     fun parseIntervals(intervals: JSONArray): List<Interval> {
-        val intervalsList = mutableListOf<Interval>()
+
         for (i in 0 until intervals.length()) {
             val interval = intervals.getJSONObject(i)
             val startTime = interval.getString("startTime")
@@ -30,35 +31,51 @@ class NetworkUtils {
                 temperatureMax = values.getString("temperatureMax").toString().toDouble(),
                 temperatureMin = values.getString("temperatureMin").toString().toDouble(),
             )
-            var weatherType = DayWeatherType.HOT
-            var weatherImageId = 0
+            val weatherType = getWeatherTypeAndImageId(temperature).first
+            val imageId = getWeatherTypeAndImageId(temperature).second
 
-            getWeatherTypeAndImage(temperature) { weather, imageId ->
-                weatherType = weather
-                weatherImageId = imageId
-            }
-
-
-            intervalsList.add(Interval(startTime, temperature, weatherType, weatherImageId))
+            intervalsList.add(Interval(startTime, temperature, weatherType, imageId))
         }
 
         Log.i("hiiiiiiiii", intervalsList.toString())
         return intervalsList
     }
 
-    private fun getWeatherTypeAndImage(temperature: Temperature, callback: (DayWeatherType, Int) -> Unit) {
-        when {
+    private fun getWeatherTypeAndImageId(temperature: Temperature):Pair<DayWeatherType,Int> {
+        return when {
             temperature.temperatureAvg < 20.0 -> {
-                callback(DayWeatherType.COLD, R.drawable.svg_cold)
+                Pair(DayWeatherType.COLD ,R.drawable.svg_cold)
             }
             temperature.temperatureAvg in 20.0..25.0 -> {
-                callback(DayWeatherType.WORM, R.drawable.svg_worm)
+                Pair(DayWeatherType.WORM ,R.drawable.svg_worm)
             }
             else -> {
-                callback(DayWeatherType.HOT, R.drawable.svg_hot)
+                Pair(DayWeatherType.HOT ,R.drawable.svg_hot)
             }
         }
     }
+
+
+
+
+
+
+
+
+
+//    private fun getWeatherImage(temperature: Temperature): Int {
+//        return when {
+//            temperature.temperatureAvg < 20.0 -> {
+//                R.drawable.svg_cold
+//            }
+//            temperature.temperatureAvg in 20.0..25.0 -> {
+//                R.drawable.svg_worm
+//            }
+//            else -> {
+//                R.drawable.svg_hot
+//            }
+//        }
+//    }
 
 
 }

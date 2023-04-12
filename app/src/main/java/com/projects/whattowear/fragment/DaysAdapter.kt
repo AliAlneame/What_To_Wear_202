@@ -9,8 +9,17 @@ import com.projects.whattowear.R
 import com.projects.whattowear.databinding.ItemDayBinding
 import com.projects.whattowear.model.DayWeatherType
 import com.projects.whattowear.model.Interval
+import com.projects.whattowear.network.ApiClient
+import com.projects.whattowear.network.DataManager
+import com.projects.whattowear.network.NetworkUtils
 
-class DaysAdapter : ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUtil()) {
+class DaysAdapter(
+    private val listener: (item: Interval) -> Unit,
+) :
+    ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUtil()) {
+    private val utils = NetworkUtils()
+    private val client = ApiClient(utils)
+    private val data = DataManager(client)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -19,25 +28,26 @@ class DaysAdapter : ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUt
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(listener, getItem(position))
     }
 
 
     inner class ItemViewHolder(private val binding: ItemDayBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(interval: Interval) {
-                binding.apply {
-                    textTemperatureMax.text = "max ${interval.values.temperatureMax}°c"
-                    textTemperatureMin.text = "min ${interval.values.temperatureMin}°c"
-                    textItemDayDate.text = "${interval.startTime.substringBefore("T")}"
-                    imageWeather.setImageResource(interval.weatherImageId)
-                    textWeatherType.text = when(interval.weatherType) {
-                        DayWeatherType.HOT -> "Sunny"
-                        DayWeatherType.COLD -> "Cold"
-                        else -> "Worm"
-                    }
+        fun bind(listener: (item: Interval) -> Unit, interval: Interval) {
+            binding.apply {
+                textTemperatureMax.text = "Highest ${interval.values.temperatureMax}°c"
+                textTemperatureMin.text = "Lowest ${interval.values.temperatureMin}°c"
+                textItemDayDate.text = data.getDayName(interval.startTime.substringBefore("T"),"EEE")
+                imageWeather.setImageResource(interval.weatherImageId)
+                textWeatherType.text = when (interval.weatherType) {
+                    DayWeatherType.HOT -> "Sunny"
+                    DayWeatherType.COLD -> "Cold"
+                    else -> "Worm"
                 }
+                root.setOnClickListener { listener(interval) }
             }
+        }
 
     }
 
