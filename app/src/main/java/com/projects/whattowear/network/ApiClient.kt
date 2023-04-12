@@ -29,9 +29,9 @@ class ApiClient(private val utils: NetworkUtils) {
     fun makeRequest(callback: (List<Interval>?, String?) -> Unit) {
         val request = Request.Builder().url(httpUrl).build()
         client.newCall(request).enqueue(object : Callback {
+
             override fun onFailure(call: Call, e: IOException) {
                 callback(null,e.message)
-
                 Log.i("HI", "fail ${e.message}")
             }
 

@@ -33,6 +33,12 @@ class HomeFragment : Fragment() {
             } else {
                 requireActivity().runOnUiThread {
                     daysAdapter.submitList(intervalsList)
+                    val todayWeather =  intervalsList!![0]
+                    binding.apply {
+                        textDayDate.text = todayWeather.startTime.substringBefore("T")
+                        imageWeather.setImageResource(todayWeather.weatherImageId)
+                        textDegree.text = "${todayWeather.values.temperatureMin}°c"
+                    }
                 }
             }
         }

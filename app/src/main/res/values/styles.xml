@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+<!--    <style name="RowLayout">-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">0dp</item>-->
+<!--        <item name="android:layout_weight">1</item>-->
+<!--        <item name="android:orientation">horizontal</item>-->
+<!--    </style>-->
+
+<!--    <style name="RowLayout.Top">-->
+<!--        <item name="android:gravity">top</item>-->
+<!--    </style>-->
+
+<!--    <style name="RowLayout.Middle">-->
+<!--        <item name="android:gravity">center</item>-->
+<!--    </style>-->
+
+<!--    <style name="RowLayout.Bottom">-->
+<!--        <item name="android:gravity">bottom</item>-->
+<!--    </style>-->
+
+<!--    <style name="view">-->
+<!--        <item name="android:layout_width">0dp</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:layout_weight">1</item>-->
+<!--    </style>-->
+
+
+</resources>

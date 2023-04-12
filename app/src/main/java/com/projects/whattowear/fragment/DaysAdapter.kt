@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.projects.whattowear.R
 import com.projects.whattowear.databinding.ItemDayBinding
+import com.projects.whattowear.model.DayWeatherType
 import com.projects.whattowear.model.Interval
 
 class DaysAdapter : ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUtil()) {
@@ -25,8 +27,15 @@ class DaysAdapter : ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUt
         RecyclerView.ViewHolder(binding.root) {
             fun bind(interval: Interval) {
                 binding.apply {
-                    textTemperatureMax.text = "Max ${interval.values.temperatureMax}"
-                    textTemperatureMin.text = "Min ${interval.values.temperatureMin}"
+                    textTemperatureMax.text = "max ${interval.values.temperatureMax}°c"
+                    textTemperatureMin.text = "min ${interval.values.temperatureMin}°c"
+                    textItemDayDate.text = "${interval.startTime.substringBefore("T")}"
+                    imageWeather.setImageResource(interval.weatherImageId)
+                    textWeatherType.text = when(interval.weatherType) {
+                        DayWeatherType.HOT -> "Sunny"
+                        DayWeatherType.COLD -> "Cold"
+                        else -> "Worm"
+                    }
                 }
             }
 
