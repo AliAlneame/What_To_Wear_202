@@ -38,7 +38,8 @@ class DaysAdapter(
             binding.apply {
                 textTemperatureMax.text = "${interval.values.temperatureAvg}°c"
 //                textTemperatureMin.text = "Lowest ${interval.values.temperatureMin}°c"
-                textItemDayDate.text = data.getDayName(interval.startTime.substringBefore("T"),"EEE")
+                textItemDayDate.text =
+                    "${ data.getDayName(interval.startTime.substringBefore("T"), "EEE")}\n${interval.startTime.substring(5,10)}"
                 imageWeather.setImageResource(interval.weatherImageId)
                 textWeatherType.text = when (interval.weatherType) {
                     DayWeatherType.HOT -> "Sunny"

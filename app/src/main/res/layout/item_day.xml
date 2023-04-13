@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="160dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="4dp"
     app:cardBackgroundColor="@color/md_theme_light_primary"
     app:cardCornerRadius="24dp">
@@ -25,16 +25,15 @@
 
         <TextView
             android:id="@+id/text_weather_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="44dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="2dp"
             android:fontFamily="@font/merriweathersans_medium"
             android:text="Worm"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/material_on_primary_emphasis_medium"
+            android:textColor="@color/material_on_primary_emphasis_high_type"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/text_temperature_max"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_item_day_date" />
+            app:layout_constraintStart_toStartOf="@+id/text_item_day_date" />
 
         <TextView
             android:id="@+id/text_item_day_date"
@@ -43,28 +42,25 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/merriweather_regular"
-            android:textColor="@color/material_on_primary_emphasis_high_type"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/text_temperature_max"
+            android:textColor="@color/material_on_primary_emphasis_medium"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_weather"
             app:layout_constraintStart_toStartOf="@id/constraint_card_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="wed" />
+            app:layout_constraintTop_toTopOf="@+id/image_weather"
+            tools:text="wed\n04-11" />
 
         <TextView
             android:id="@+id/text_temperature_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/merriweathersans_regular"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/merriweathersans_regular"
             android:text="30c"
             android:textColor="@color/material_on_primary_emphasis_high_type"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/constraint_card_view" />
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
