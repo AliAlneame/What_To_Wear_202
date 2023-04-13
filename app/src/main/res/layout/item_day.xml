@@ -28,9 +28,9 @@
             android:layout_width="44dp"
             android:layout_height="19dp"
             android:layout_marginBottom="2dp"
-            android:fontFamily="@font/merriweathersans_medium"
+            android:fontFamily="@font/merriweathersans_regular"
             android:text="Worm"
-            android:textColor="@color/material_on_primary_emphasis_high_type"
+            android:textColor="@color/material_on_primary_emphasis_medium"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/text_temperature_max"
             app:layout_constraintStart_toStartOf="@+id/text_item_day_date" />
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
-            android:fontFamily="@font/merriweather_regular"
-            android:textColor="@color/material_on_primary_emphasis_medium"
+            android:fontFamily="@font/merriweathersans_medium"
+            android:textColor="@color/material_on_primary_emphasis_high_type"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/image_weather"
             app:layout_constraintStart_toStartOf="@id/constraint_card_view"
@@ -58,7 +58,7 @@
             android:fontFamily="@font/merriweathersans_regular"
             android:text="30c"
             android:textColor="@color/material_on_primary_emphasis_high_type"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/constraint_card_view" />
 
