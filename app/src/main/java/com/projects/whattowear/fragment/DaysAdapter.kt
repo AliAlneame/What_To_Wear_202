@@ -17,9 +17,9 @@ class DaysAdapter(
     private val listener: (item: Interval) -> Unit,
 ) :
     ListAdapter<Interval, DaysAdapter.ItemViewHolder>(DaysDiffUtil()) {
-    private val utils = NetworkUtils()
-    private val client = ApiClient(utils)
-    private val data = DataManager(client)
+ //   private val utils = NetworkUtils()
+//    private val client = ApiClient(utils)
+    private val data = DataManager()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,8 +36,8 @@ class DaysAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(listener: (item: Interval) -> Unit, interval: Interval) {
             binding.apply {
-                textTemperatureMax.text = "Highest ${interval.values.temperatureMax}°c"
-                textTemperatureMin.text = "Lowest ${interval.values.temperatureMin}°c"
+                textTemperatureMax.text = "${interval.values.temperatureAvg}°c"
+//                textTemperatureMin.text = "Lowest ${interval.values.temperatureMin}°c"
                 textItemDayDate.text = data.getDayName(interval.startTime.substringBefore("T"),"EEE")
                 imageWeather.setImageResource(interval.weatherImageId)
                 textWeatherType.text = when (interval.weatherType) {

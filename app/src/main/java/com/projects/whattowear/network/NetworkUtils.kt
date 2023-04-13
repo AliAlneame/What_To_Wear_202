@@ -1,8 +1,6 @@
 package com.projects.whattowear.network
 
 import android.util.Log
-import com.projects.whattowear.R
-import com.projects.whattowear.model.DayWeatherType
 import com.projects.whattowear.model.Interval
 import com.projects.whattowear.model.Temperature
 import org.json.JSONArray
@@ -11,6 +9,7 @@ import org.json.JSONObject
 class NetworkUtils {
 
     val intervalsList = mutableListOf<Interval>()
+    private val data = DataManager()
 
     fun getIntervalsJsonArrayFromJson(response: String): JSONArray {
         val jsonObject = JSONObject(response)
@@ -21,7 +20,6 @@ class NetworkUtils {
     }
 
     fun parseIntervals(intervals: JSONArray): List<Interval> {
-
         for (i in 0 until intervals.length()) {
             val interval = intervals.getJSONObject(i)
             val startTime = interval.getString("startTime")
@@ -31,29 +29,16 @@ class NetworkUtils {
                 temperatureMax = values.getString("temperatureMax").toString().toDouble(),
                 temperatureMin = values.getString("temperatureMin").toString().toDouble(),
             )
-            val weatherType = getWeatherTypeAndImageId(temperature).first
-            val imageId = getWeatherTypeAndImageId(temperature).second
-
-            intervalsList.add(Interval(startTime, temperature, weatherType, imageId))
+            val weatherType = data.getDayWeatherType(temperature)
+            val weatherImageId = data.getWeatherAndClothesImageId(weatherType).first
+            val clothesImageId = data.getWeatherAndClothesImageId(weatherType).second
+            intervalsList.add(Interval(startTime, temperature, weatherType, weatherImageId,clothesImageId))
         }
 
         Log.i("hiiiiiiiii", intervalsList.toString())
         return intervalsList
     }
 
-    private fun getWeatherTypeAndImageId(temperature: Temperature):Pair<DayWeatherType,Int> {
-        return when {
-            temperature.temperatureAvg < 20.0 -> {
-                Pair(DayWeatherType.COLD ,R.drawable.svg_cold)
-            }
-            temperature.temperatureAvg in 20.0..25.0 -> {
-                Pair(DayWeatherType.WORM ,R.drawable.svg_worm)
-            }
-            else -> {
-                Pair(DayWeatherType.HOT ,R.drawable.svg_hot)
-            }
-        }
-    }
 
 
 

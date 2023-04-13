@@ -37,10 +37,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        tools:src="@drawable/svg_worm"
                         app:layout_constraintBottom_toBottomOf="@+id/text_location"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_day_date" />
+                        app:layout_constraintTop_toBottomOf="@+id/text_day_date"
+                        tools:src="@drawable/svg_worm" />
 
                     <TextView
                         android:id="@+id/text_today"
@@ -48,7 +48,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
-                        android:text="Today"
+                        android:fontFamily="@font/merriweathersans_semibold"
+                        tools:text="Today"
                         android:textColor="@color/material_on_primary_emphasis_high_type"
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="@+id/constraint_card_view"
@@ -60,11 +61,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
-                        tools:text="Wed"
+                        android:fontFamily="@font/merriweathersans_regular"
                         android:textColor="@color/material_on_primary_emphasis_medium"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_today"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="Wed" />
 
 
                     <TextView
@@ -72,12 +74,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        tools:text="29°c"
+                        android:fontFamily="@font/merriweathersans_semibold"
                         android:textColor="@color/material_on_primary_emphasis_high_type"
                         android:textSize="48sp"
                         app:layout_constraintBottom_toTopOf="@+id/text_location"
                         app:layout_constraintStart_toStartOf="@+id/constraint_card_view"
-                        app:layout_constraintTop_toBottomOf="@id/text_today" />
+                        app:layout_constraintTop_toBottomOf="@id/text_today"
+                        tools:text="29°c" />
 
                     <TextView
                         android:id="@+id/text_location"
@@ -86,7 +89,9 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="24dp"
+                        android:fontFamily="@font/merriweathersans_regular"
                         android:text="Cairo, Egypt"
+                        android:visibility="invisible"
                         android:textColor="@color/material_on_primary_emphasis_medium"
                         android:textSize="16sp"
                         app:drawableStartCompat="@drawable/location_on_fill0_wght400_grad0_opsz48"
@@ -121,24 +126,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                tools:text="Here is our pick for you today!"
+                android:fontFamily="@font/merriweathersans_light"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="@color/material_on_surface_emphasis_high_type"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_days" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_days"
+                tools:text="Here is our pick for you today" />
 
-
-            <!--            <ImageView-->
-            <!--                android:id="@+id/image_our_pick"-->
-            <!--                android:layout_width="120dp"-->
-            <!--                android:layout_height="120dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:layout_marginEnd="16dp"-->
-            <!--                android:src="@drawable/no_back_clothes_bro"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.5"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/text_our_pick"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/recycler_view_days" />-->
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_clothes"
@@ -148,12 +142,12 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="fitXY"
-                tools:background="@drawable/image_worm_1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/text_our_pick"
                 app:layout_constraintTop_toBottomOf="@+id/text_our_pick"
-                app:shapeAppearance="@style/RoundedImageView" />
+                app:shapeAppearance="@style/RoundedImageView"
+                tools:background="@drawable/image_worm_1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,12 +1,14 @@
 package com.projects.whattowear.network
 
-import android.util.Log
 import com.projects.whattowear.R
 import com.projects.whattowear.model.DayWeatherType
+import com.projects.whattowear.model.Temperature
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DataManager(private val client: ApiClient) {
+class DataManager(
+    //private val client: ApiClient
+) {
 
     private fun getClothesList(dayWeatherType: DayWeatherType): List<Int> {
         return when (dayWeatherType) {
@@ -31,21 +33,43 @@ class DataManager(private val client: ApiClient) {
         }
     }
 
-    fun getRandomClothe(): Int {
-        val todayWeatherType = client.intervals[0].weatherType
-        Log.i("hio",client.intervals.toString())
-        return getClothesList(todayWeatherType).shuffled()[0]
-    }
-
-    fun getDayName(dateString: String,formatPattern:String): String {
+    fun getDayName(dateString: String, formatPattern: String): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = dateFormat.parse(dateString)
         val calendar = Calendar.getInstance()
-        calendar.time = date
+        calendar.time = date!!
         val dayOfWeak = calendar.get(Calendar.DAY_OF_WEEK)
         return SimpleDateFormat(formatPattern, Locale.getDefault()).format(date)
     }
 
+    fun getWeatherAndClothesImageId(dayWeatherType: DayWeatherType): Pair<Int, Int> {
+        return when (dayWeatherType) {
+            DayWeatherType.COLD -> {
+                Pair(R.drawable.svg_cold,getClothesList(dayWeatherType).random())
+            }
+            DayWeatherType.WORM -> {
+                Pair(R.drawable.svg_worm,getClothesList(dayWeatherType).random())
+            }
+            else -> {
+                Pair(R.drawable.svg_hot,getClothesList(dayWeatherType).random())
+            }
+        }
+    }
+
+
+    fun getDayWeatherType(temperature: Temperature): DayWeatherType {
+        return when {
+            temperature.temperatureAvg < 20.0 -> {
+                DayWeatherType.COLD
+            }
+            temperature.temperatureAvg in 20.0..25.0 -> {
+                DayWeatherType.WORM
+            }
+            else -> {
+                DayWeatherType.HOT
+            }
+        }
+    }
 
 
     //    fun getRandomClothe(): Int {

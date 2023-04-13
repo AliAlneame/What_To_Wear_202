@@ -19,7 +19,6 @@ class HomeFragment : Fragment() {
     private lateinit var client: ApiClient
     private lateinit var data: DataManager
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,23 +44,35 @@ class HomeFragment : Fragment() {
     private fun init(daysAdapter: DaysAdapter) {
         utils = NetworkUtils()
         client = ApiClient(utils)
-        data = DataManager(client)
+        data = DataManager()
         binding.recyclerViewDays.adapter = daysAdapter
         daysAdapter.submitList(listOf())
     }
 
     private fun setupBinding(todayWeather: Interval) {
+        //val weatherType = todayWeather.weatherType
+        val date = data.getDayName(todayWeather.startTime.substringBefore("T"),"EEEE")
         binding.apply {
             textDayDate.text = data.getDayName(todayWeather.startTime.substringBefore("T"),"EEEE")
             imageWeather.setImageResource(todayWeather.weatherImageId)
-            textDegree.text = "${todayWeather.values.temperatureMin}°c"
-            imageClothes.setImageResource(data.getRandomClothe())
+            textDegree.text = "${todayWeather.values.temperatureAvg}°c"
+            imageClothes.setImageResource(todayWeather.clothesImageId)
             textOurPick.text = if (todayWeather.startTime == client.intervals[0].startTime) {
                 "Here is our pick for you today"
             } else {
                 "Here is our pick for your ${data.getDayName(todayWeather.startTime,"EEEE")}"
             }
+            textToday.text = if (todayWeather.startTime == client.intervals[0].startTime) {
+                "Today"
 
+            } else {
+                "${data.getDayName(todayWeather.startTime.substringBefore("T"),"EEEE")}".apply {
+                    textDayDate.text = todayWeather.startTime.substringBefore("T")
+                }
+
+            }
+
+            textLocation.visibility = View.VISIBLE
         }
     }
 
