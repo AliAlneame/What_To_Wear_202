@@ -1,35 +1,40 @@
 package com.projects.whattowear.network
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.projects.whattowear.R
+import com.projects.whattowear.local.PrefsUtil
 import com.projects.whattowear.model.DayWeatherType
+import com.projects.whattowear.model.Interval
 import com.projects.whattowear.model.Temperature
 import java.text.SimpleDateFormat
 import java.util.*
 
 class DataManager(
-    //private val client: ApiClient
 ) {
+
+    val clothesCold = listOf(
+        R.drawable.image_cold_1,
+        R.drawable.image_cold_2,
+        R.drawable.image_cold_3
+    )
+    val clothesHot = listOf(
+        R.drawable.image_hot_1,
+        R.drawable.image_hot_2,
+        R.drawable.image_hot_3,
+    )
+    val clothesWorm = listOf(
+        R.drawable.image_worm_1,
+        R.drawable.image_worm_2,
+        R.drawable.image_worm_3,
+        R.drawable.image_worm_4,
+    )
 
     private fun getClothesList(dayWeatherType: DayWeatherType): List<Int> {
         return when (dayWeatherType) {
-            DayWeatherType.COLD -> {
-                listOf(
-                    R.drawable.image_cold_1,
-                    R.drawable.image_cold_2,
-                    R.drawable.image_cold_3
-                )
-            }
-            DayWeatherType.WORM -> listOf(
-                R.drawable.image_worm_1,
-                R.drawable.image_worm_2,
-                R.drawable.image_worm_3,
-                R.drawable.image_worm_4,
-            )
-            else -> listOf(
-                R.drawable.image_hot_1,
-                R.drawable.image_hot_2,
-                R.drawable.image_hot_3,
-            )
+            DayWeatherType.COLD -> clothesCold
+            DayWeatherType.WORM -> clothesWorm
+            else -> clothesHot
         }
     }
 
@@ -38,22 +43,25 @@ class DataManager(
         val date = dateFormat.parse(dateString)
         val calendar = Calendar.getInstance()
         calendar.time = date!!
-        val dayOfWeak = calendar.get(Calendar.DAY_OF_WEEK)
         return SimpleDateFormat(formatPattern, Locale.getDefault()).format(date)
     }
 
-    fun getWeatherAndClothesImageId(dayWeatherType: DayWeatherType): Pair<Int, Int> {
+    fun getWeatherImageId(dayWeatherType: DayWeatherType): Int {
         return when (dayWeatherType) {
             DayWeatherType.COLD -> {
-                Pair(R.drawable.svg_cold,getClothesList(dayWeatherType).random())
+                R.drawable.svg_cold
             }
             DayWeatherType.WORM -> {
-                Pair(R.drawable.svg_worm,getClothesList(dayWeatherType).random())
+                R.drawable.svg_worm
             }
             else -> {
-                Pair(R.drawable.svg_hot,getClothesList(dayWeatherType).random())
+                R.drawable.svg_hot
             }
         }
+    }
+
+    fun getClothesImageId(dayWeatherType: DayWeatherType): Int {
+        return getClothesList(dayWeatherType).random()
     }
 
 
@@ -71,20 +79,7 @@ class DataManager(
         }
     }
 
+//    var intervalsImageId = PrefsUtil.intervalsImageId
 
-    //    fun getRandomClothe(): Int {
-//        var intervalsList = listOf<Interval>()
-//        client.makeRequest { intervals, message ->
-//            if (message != null) {
-//                Log.i("hio",message)
-//            } else {
-//                intervalsList = intervals!!
-//                Log.i("hiio",intervalsList.toString())
-//            }
-//        }
-//        val todayWeatherType = intervalsList[0].weatherType
-//        Log.i("hio",intervalsList.toString())
-//        return getClothesList(todayWeatherType).random()
-//    }
 
 }

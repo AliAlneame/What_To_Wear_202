@@ -5,12 +5,12 @@ import com.projects.whattowear.BuildConfig
 import com.projects.whattowear.model.Interval
 import com.projects.whattowear.utils.Constants
 import okhttp3.*
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 
 class ApiClient(private val utils: NetworkUtils) {
     var intervals = listOf<Interval>()
+    //var intervals: List<Interval>? = null
 
     private val client: OkHttpClient by lazy {
         val interceptor =
@@ -32,7 +32,7 @@ class ApiClient(private val utils: NetworkUtils) {
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                callback(null,e.message)
+                callback(null, e.message)
                 Log.i("HI", "fail ${e.message}")
             }
 
@@ -40,7 +40,9 @@ class ApiClient(private val utils: NetworkUtils) {
                 response.body?.string().let { jsonString ->
                     val jsonArray = utils.getIntervalsJsonArrayFromJson(jsonString!!)
                     intervals = utils.parseIntervals(jsonArray)
-                    callback(intervals,null)
+//                    getIntervalsList(_intervals)
+//                    if (intervals[0].startTime =! )
+                    callback(intervals, null)
 
                     Log.i("HI", intervals.toString())
                 }
@@ -51,6 +53,23 @@ class ApiClient(private val utils: NetworkUtils) {
 
 
 
+
+
+
+//    fun getIntervalsList(values: List<Interval>): List<Interval> {
+//        return if (PrefsUtil.intervalsImageIdList?.isEmpty() == true) {
+//            intervals = values
+//            PrefsUtil.intervalsImageIdList = values.map { it.clothesImageId }.toString()
+//            values
+//        } else {
+//            val imageIdList = PrefsUtil.intervalsImageIdList?.split(",")?.map { it.toInt() }
+//            val result = values.mapIndexed { index, interval ->
+//                interval.clothesImageId = imageIdList!![index]
+//            } as List<Interval>
+//            intervals = result
+//            result
+//        }
+//    }
 
 
 }

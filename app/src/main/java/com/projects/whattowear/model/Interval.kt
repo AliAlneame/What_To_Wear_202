@@ -7,5 +7,5 @@ data class Interval(
     val values: Temperature,
     val weatherType: DayWeatherType,
     @DrawableRes val weatherImageId: Int,
-    @DrawableRes val clothesImageId: Int,
+    @DrawableRes var clothesImageId: Int,
 )
