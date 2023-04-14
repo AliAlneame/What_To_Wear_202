@@ -2,10 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="160dp"
+    android:layout_width="140dp"
+    android:layout_height="150dp"
     android:layout_marginHorizontal="4dp"
-    app:cardBackgroundColor="@color/md_theme_light_primary"
+    app:cardBackgroundColor="@color/md_theme_primary"
     app:cardCornerRadius="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/image_weather"
-            android:layout_width="80dp"
+            android:layout_width="75dp"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

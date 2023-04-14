@@ -1,6 +1,7 @@
 package com.projects.whattowear.network
 
 import android.util.Log
+import com.projects.whattowear.BuildConfig
 import com.projects.whattowear.model.Interval
 import com.projects.whattowear.utils.Constants
 import okhttp3.*
@@ -19,7 +20,7 @@ class ApiClient(private val utils: NetworkUtils) {
 
     private val httpUrl =
         HttpUrl.Builder().scheme(Constants.SCHEME).host(Constants.BASE_URL).addPathSegments("v4")
-            .addPathSegment("timelines").addQueryParameter("apikey", Constants.API_KEY)
+            .addPathSegment("timelines").addQueryParameter("apikey", BuildConfig.apikey)
             .addQueryParameter("fields", Constants.FIELDS)
             .addQueryParameter("location", Constants.LOCATION)
             .addQueryParameter("timesteps", Constants.TIME_STEPS)
