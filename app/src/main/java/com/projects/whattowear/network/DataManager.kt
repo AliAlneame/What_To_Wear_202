@@ -1,29 +1,25 @@
 package com.projects.whattowear.network
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.projects.whattowear.R
-import com.projects.whattowear.local.PrefsUtil
 import com.projects.whattowear.model.DayWeatherType
 import com.projects.whattowear.model.Interval
 import com.projects.whattowear.model.Temperature
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DataManager(
-) {
+class DataManager {
 
-    val clothesCold = listOf(
+    private val clothesCold = listOf(
         R.drawable.image_cold_1,
         R.drawable.image_cold_2,
         R.drawable.image_cold_3
     )
-    val clothesHot = listOf(
+    private val clothesHot = listOf(
         R.drawable.image_hot_1,
         R.drawable.image_hot_2,
         R.drawable.image_hot_3,
     )
-    val clothesWorm = listOf(
+    private val clothesWorm = listOf(
         R.drawable.image_worm_1,
         R.drawable.image_worm_2,
         R.drawable.image_worm_3,
@@ -60,10 +56,16 @@ class DataManager(
         }
     }
 
-    fun getClothesImageId(dayWeatherType: DayWeatherType): Int {
-        return getClothesList(dayWeatherType).random()
-    }
+    fun getClothesImageId(
+        dayWeatherType: DayWeatherType, intervals: List<Interval>,
+    ): Int {
+        return if (intervals.isNotEmpty() && dayWeatherType == intervals.last().weatherType) {
+            (getClothesList(dayWeatherType) - intervals.last().clothesImageId).random()
+        } else {
+            getClothesList(dayWeatherType).random()
+        }
 
+    }
 
     fun getDayWeatherType(temperature: Temperature): DayWeatherType {
         return when {
@@ -78,8 +80,6 @@ class DataManager(
             }
         }
     }
-
-//    var intervalsImageId = PrefsUtil.intervalsImageId
 
 
 }

@@ -23,12 +23,11 @@ class NetworkUtils {
     }
 
     fun parseIntervals(intervals: JSONArray): List<Interval> {
-        if (PrefsUtil.startTimeAndImageId?.isNotEmpty() == true) {
-
-        }
+        val sharePref = getStartTimeAndImageId()
         for (i in 0 until intervals.length()) {
             val interval = intervals.getJSONObject(i)
             val startTime = interval.getString("startTime")
+
             val values = interval.getJSONObject("values")
             val temperature = Temperature(
                 temperatureAvg = values.getString("temperatureAvg").toString().toDouble(),
@@ -37,23 +36,27 @@ class NetworkUtils {
             )
             val weatherType = data.getDayWeatherType(temperature)
             val weatherImageId = data.getWeatherImageId(weatherType)
-            val clothesImageId = data.getClothesImageId(weatherType)
-            val startTimeAndImageId = Pair(startTime, clothesImageId)
+            val clothesImageId =
+                if (i + 1 < intervals.length() && (startTime == sharePref?.get(i)?.first || startTime == sharePref?.get(
+                        i + 1
+                    )?.first)
+                ) {
+                    sharePref?.get(i)?.second
+                } else {
+                    data.getClothesImageId(weatherType, intervalsList)
+                }
+
+            val startTimeAndImageId = Pair(startTime, clothesImageId!!)
             startTimeAndImageIdPairs.add(startTimeAndImageId)
             intervalsList.add(
-                Interval(
-                    startTime,
-                    temperature,
-                    weatherType,
-                    weatherImageId,
-                    clothesImageId
-                )
+                Interval(startTime, temperature, weatherType, weatherImageId, clothesImageId)
             )
         }
-
         Log.i("hiiiiiiiii", intervalsList.toString())
         saveStartTimeAndImageId(startTimeAndImageIdPairs)
+        Log.i("clothes", intervalsList.toString())
         return intervalsList
+
     }
 
 
@@ -66,7 +69,7 @@ class NetworkUtils {
 
     }
 
-    private fun getStartTimeAndImageId(context:Context): List<Pair<String,Int>>? {
+    private fun getStartTimeAndImageId(): List<Pair<String, Int>>? {
         val delimiter1 = "|"
         val delimiter2 = ","
         val serializedPairsArray = PrefsUtil.startTimeAndImageId?.split(delimiter1)?.toTypedArray()
@@ -75,21 +78,6 @@ class NetworkUtils {
             Pair(pairValues[0], pairValues[1].toInt())
         }
     }
-
-
-//    private fun getWeatherImage(temperature: Temperature): Int {
-//        return when {
-//            temperature.temperatureAvg < 20.0 -> {
-//                R.drawable.svg_cold
-//            }
-//            temperature.temperatureAvg in 20.0..25.0 -> {
-//                R.drawable.svg_worm
-//            }
-//            else -> {
-//                R.drawable.svg_hot
-//            }
-//        }
-//    }
 
 
 }

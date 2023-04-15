@@ -31,4 +31,6 @@ object PrefsUtil {
         set(value) {
             sharedPrefs?.edit()?.putString(START_TIME_AND_IMAGE_ID, value)?.apply()
         }
+
+
 }

@@ -51,25 +51,4 @@ class ApiClient(private val utils: NetworkUtils) {
     }
 
 
-
-
-
-
-
-//    fun getIntervalsList(values: List<Interval>): List<Interval> {
-//        return if (PrefsUtil.intervalsImageIdList?.isEmpty() == true) {
-//            intervals = values
-//            PrefsUtil.intervalsImageIdList = values.map { it.clothesImageId }.toString()
-//            values
-//        } else {
-//            val imageIdList = PrefsUtil.intervalsImageIdList?.split(",")?.map { it.toInt() }
-//            val result = values.mapIndexed { index, interval ->
-//                interval.clothesImageId = imageIdList!![index]
-//            } as List<Interval>
-//            intervals = result
-//            result
-//        }
-//    }
-
-
 }
